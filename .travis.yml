@@ -50,4 +50,4 @@ deploy:
 notifications:
   email:
     recipients:
-      - gy0916@gmail.com
+      - gychoi0916@gmail.com
