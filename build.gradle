@@ -31,8 +31,15 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.2.15'
-	compile('org.mariadb.jdbc:mariadb-java-client')
+	compile("org.mariadb.jdbc:mariadb-java-client")
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
 	runtime('com.h2database:h2')
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	//crawler
+	compile 'org.apache.commons:commons-csv:1.8'
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.2.2.RELEASE'
 }

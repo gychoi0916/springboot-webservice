@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 tracker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class = "container">
+
+    <h1 class="display-4">Coronavirus Tracker Application(Korea)</h1>
+    <p class="lead">한국의 코로나19 현황테이블</p>
+
+    <div class="jumbotron">
+        <h1 class="display-4">{{stockStats.0.low}}</h1>
+        <p class="lead">Total cases reported</p>
+        <hr class="my-4">
+        <p>
+            <span>New cases reported since previous day</span>
+            <span>{{stockStats.0.diffFromPrevDay}}</span>
+        </p>
+    </div>
+
+    <table class= "table">
+        <tr>
+            <th>전일등락</th>
+            <th>고가</th>
+            <th>저가</th>
+        </tr>
+{{!--         {{#each koreaStats}} --}}
+        <tr>
+            <td>{{stockStats.0.diffFromPrevDay}}</td>
+            <td>{{stockStats.0.low}}</td>
+            <td>{{stockStats.0.low}}</td>
+{{!--                 <td>{{inspection}}</td> --}}
+        </tr>
+{{!--         {{/each}} --}}
+    </table>
+</div>
+
+</body>
+</html>
