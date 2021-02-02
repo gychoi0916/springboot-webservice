@@ -21,6 +21,8 @@ public class StockStats {
     private int high;
 
     private int low;
+
+    private String code;
 //    private int diffFromPrevDay; // 전일대비확진환자증감
 //
 //    private int total; // 확진환자수

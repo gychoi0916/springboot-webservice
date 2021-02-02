@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,15 +26,17 @@ public class WebController {
     private PostsService postsService;
 
     @GetMapping("/")
-    public String main(Model model) {
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String main(Model model) throws IOException {
+//        model.addAttribute("posts", postsService.findAllDesc());
+        List<StockStats> stockStatsList = CrawlService.getStockData();
+        model.addAttribute("stocks", stockStatsList);
         return "main";
     }
-    private final CrawlService crawlService;
+//    private final CrawlService crawlService;
 
     @GetMapping("/stock")
-    public String stock(Model model) throws IOException {
-        List<StockStats> stockStatsList = crawlService.getStock();
+    public String stock(@RequestParam("index") String code, Model model) throws IOException {
+        List<StockStats> stockStatsList = CrawlService.getStock(code);//"003550");
 //        model.addAttribute("stocks",stockStatsList);
         model.addAttribute("stocks",stockStatsList);
 //        System.out.println(stockStatsList.size());

@@ -14,19 +14,15 @@ import java.util.List;
 
 @Service
 public class CrawlService {
-//    private static String VIRUS_DATA_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv";
-//    private static String KOREA_COVID_DATAS_URL = "http://ncov.mohw.go.kr/bdBoardList_Real.do?brdId=1&brdGubun=13";
-//    private static String SAMSUNG_CHART_URL = "https://finance.naver.com/item/main.nhn?code=005930";
-    private static String SAMSUNG_SISE_URL = "https://finance.naver.com/item/sise.nhn?code=005930";
 
-    @PostConstruct
-    public List<StockStats> getStock() throws IOException {
+//    @PostConstruct
+    public static StockStats addStock(String code) throws IOException {
 
-        List<StockStats> stockStatsList = new ArrayList<>();
+        String SAMSUNG_SISE_URL = "https://finance.naver.com/item/sise.nhn?code="+code;
+//        List<StockStats> stockStatsList = new ArrayList<>();
 //        List<StockStats> stockStatsList = new ArrayList<StockStats>();
 //        Document doc = Jsoup.connect(SAMSUNG_CHART_URL).get();
         Document doc2 = Jsoup.connect(SAMSUNG_SISE_URL).get();
-
         Elements img = doc2.select("div[class=chart] img");
         Elements company = doc2.select("div[class=wrap_company] h2 a");
         Elements contents = doc2.select("table[class=type2 type_tax] tbody");
@@ -46,10 +42,11 @@ public class CrawlService {
                 .high(Integer.parseInt(tdContents.get(9).text().replaceAll("[^0-9]","")))
                 .low(Integer.parseInt(tdContents.get(11).text().replaceAll("[^0-9]","")))
                 .url(img.attr("src"))
+                .code(code)
                 .build();
 //            System.out.println(stockStats);
-        System.out.println(stockStats);
-        stockStatsList.add(stockStats);
+//        System.out.println(stockStats);
+//        stockStatsList.add(stockStats);
 //        for(Element content : contents){
 ////            System.out.println(content);
 //            Elements tdContents = content.select("td");
@@ -81,6 +78,19 @@ public class CrawlService {
 ////            System.out.println(koreaStats.toString());
 //            koreaStatsList.add(koreaStats);
 //        }
-        return stockStatsList;
+        return stockStats;
+    }
+    public static List<StockStats> getStockData() throws IOException {
+        List<StockStats> stocksList = new ArrayList<>();
+        String companys[] = {"005930","035420","003550"};
+        for(int i = 0; i<companys.length; i++){
+            stocksList.add(addStock(companys[i]));
+        }
+        return stocksList;
+    }
+    public static List<StockStats> getStock(String code) throws IOException {
+        List<StockStats> stockList = new ArrayList<>();
+        stockList.add(addStock(code));
+        return stockList;
     }
 }
